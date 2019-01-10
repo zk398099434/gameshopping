@@ -1,0 +1,18 @@
+server:
+  port: 9527
+spring:
+  application:
+    name: MICROSERVICE-ZUUL-GATEWAY
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: gateway-9527.com #Eureka状态那一列显示显示的名字
+    prefer-ip-address: true
+zuul:
+  routes:
+     myUser.serviceId: gameshopping-plat
+     myUser.path: /plat/**  #以/user/开头的所有路径都转发给user-provider
+  ignored-services:  "*" #可以一个一个配置,如:user-provider,但是很麻烦,用*来通配
+  prefix: "/services" #加上统一前缀
